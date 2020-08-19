@@ -1,0 +1,65 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container > .form{
+    background: #ffffff;
+    max-width: 400px;
+    max-height: 300px;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    -webkit-box-shadow: 0px 6px 15px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 6px 15px 1px rgba(0,0,0,0.75);
+    position: relative;
+
+}
+
+.container > .form > .form-control{
+    width: 70%;
+    height: 30px;
+    border-radius: 2px;
+    border: none;
+    border-bottom: 1px solid #f75c03;
+    padding: 2px;
+    font-size: 18px;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.container > .form > .btn-success{
+    background: #f75c03;
+    border: none;
+    position: absolute;
+    bottom: 25px;
+    right: 15px;
+    width: 30%;
+    cursor: pointer;
+}
+
+.container > .form > .btn-success-out{
+    border: 1px solid #f75c03;
+    position: absolute;
+    bottom: 25px;
+    right: 35%;
+    width: 30%;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    color: #f75c03;
+    text-decoration: none;
+}
