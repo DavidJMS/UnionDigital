@@ -3,7 +3,7 @@ from django.db import models
 
 class EmployeeProfile(models.Model):
     """
-        Profiles of 
+        Profiles of users employees
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     position = models.CharField(max_length=120, blank=True)

@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Unión Digital | Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% load static %}
-        <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <form  method="POST" action="{% url 'accounts:login' %}" class="form">
-                {% csrf_token %}
-                <div style="display: block; height: 100px;"></div>
-                <input class="form-control" type="text" placeholder="User" name="username" >
-                <input class="form-control" type="password" placeholder="Password" name="password">
-                <button type="submit" class="form-control btn-success">Login</button>
-                <a href="{% url 'accounts:signup' %}" class="form-control btn-success-out">Sign up</a>
-            </form>
-            {% if form.errors %}
-                <p class="alert alert-danger">
+{% extends "accounts/base.html" %}
 
-                {{form.erros}}
-                </p>
-            {% endif %}
-        </div>
-    </body>
-</html>
+{% block head %}
+    <title>Unión Digital | Login</title>
+{% endblock head %}
+
+{% block content %}
+    <form  method="POST" action="{% url 'accounts:login' %}" class="form">
+        {% csrf_token %}
+        <div style="display: block; height: 100px;"></div>
+        <input class="form-control" type="text" placeholder="User" name="username" >
+        <input class="form-control" type="password" placeholder="Password" name="password">
+        <button type="submit" class="form-control btn-success">Login</button>
+        <a href="{% url 'accounts:signup' %}" class="form-control btn-success-out">Sign up</a>
+    </form>
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            Your Credentials Do Not Match
+        </p>
+    {% endif %}
+{% endblock content %}

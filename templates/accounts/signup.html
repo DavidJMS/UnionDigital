@@ -1,0 +1,75 @@
+{% extends "accounts/base.html" %}
+
+{% block head %}
+    <title>Unión Digital | Login</title>
+{% endblock head %}
+
+{% block content %}
+    {% load static %}
+    
+    <form  method="POST" action="{% url 'accounts:signup' %}" class="form form-slash-efect">
+        <img src="{% static 'logos/3.jpg' %}" alt="logo">
+        {% csrf_token %}
+        <div style="display: block; height: 100px;"></div>
+        <div class="slash-efect slash-efect-show">
+            <input class="form-control" type="text" placeholder="User Name" name="username" >
+            <input class="form-control" type="email" placeholder="Email" name="email" >
+        </div>
+        <div class="slash-efect slash-efect-hidde-right">
+            <input class="form-control" type="text" placeholder="First Name" name="first_name" >
+            <input class="form-control" type="text" placeholder="Last Name" name="last_name" >
+        </div>
+        <div class="slash-efect slash-efect-hidde-right">
+            <input class="form-control" type="password" placeholder="Password" name="password">
+            <input class="form-control" type="password" placeholder="Password Confirmation" name="password_confirmation">
+        </div>
+        <span id="left" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:15%; bottom: 25px;" >
+            <i class="fas fa-angle-left"></i>
+        </span>
+        <span id="right" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:25%; bottom: 25px;">
+            <i class="fas fa-angle-right"></i>
+        </span>
+        <button type="submit" class="form-control btn-success">Sign Up</button>
+    </form>
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            Your Credentials Do Not Match
+        </p>
+    {% endif %}
+    <script>
+
+        divToHidde = Array.from(document.getElementsByClassName('slash-efect'));
+        divShowed = document.getElementsByClassName('slash-efect-show');
+        hiddeLeftButton = document.getElementById('right');
+        hiddeRightButton = document.getElementById('left');
+
+        let index = 0;
+
+        hiddeLeftButton.addEventListener('click',(e)=>{
+            index++; 
+            hiddeToLeft(index,divToHidde);
+        });
+
+        hiddeRightButton.addEventListener('click',(e)=>{
+            index--; 
+            hiddeToRight(index,divToHidde);
+        });
+
+        function hiddeToLeft(index,array){
+            divShowed[0].classList.add("slash-efect-hidde-left");
+            divShowed[0].classList.remove("slash-efect-show");
+            array[index].classList.remove("slash-efect-hidde-right");
+            array[index].classList.add('slash-efect-show');
+        }
+
+        function hiddeToRight(index,array){
+            divShowed[0].classList.add("slash-efect-hidde-right");
+            divShowed[0].classList.remove("slash-efect-show");
+            array[index].classList.remove("slash-efect-hidde-left");
+            array[index].classList.add('slash-efect-show');
+        }
+
+        console.log(divToHidde);
+
+    </script>
+{% endblock content %}

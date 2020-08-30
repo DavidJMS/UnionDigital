@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block head %}
+        
+        {% endblock head %}
+        {% load static %}
+        <link href="{% static 'tipografia/OpenSans-Bold' %}" rel="stylesheet">
+        <link href="{% static 'tipografia/OpenSans-Light' %}" rel="stylesheet">
+        <link href="{% static 'tipografia/OpenSans-Regular' %}" rel="stylesheet">
+        <link href="{% static 'fontawesome/css/all.css' %}" rel="stylesheet">
+        <link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+        {% block styles %}
+        
+        {% endblock styles %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'navbar.html' %}
+            {% block content %}
+            {% endblock %} 
+        </div>
+        <script src="{% static 'js/navbar.js' %}"></script>
+    </body>
+</html>
