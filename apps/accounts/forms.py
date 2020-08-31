@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.hashers import make_password
 # models
 from .models import EmployeeProfile
 from django.contrib.auth.models import User
@@ -6,8 +7,8 @@ from django.contrib.auth.models import User
 class SignupForm(forms.Form):
 
     username = forms.CharField(min_length=4, max_length=50)
-    password = forms.CharField(min_length=4,max_length=70,)
-    password_confirmation = forms.CharField(min_length=4,max_length=70)
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_confirmation = forms.CharField(widget=forms.PasswordInput)
     first_name = forms.CharField(min_length=2, max_length=50)
     last_name = forms.CharField(min_length=2, max_length=50)
     email = forms.CharField(min_length=6,max_length=70)
@@ -22,12 +23,13 @@ class SignupForm(forms.Form):
     def clean(self):
         data = super().clean()
         password = data['password']
-        print(data)
         password_confirmation = data['password_confirmation']
 
         if password != password_confirmation:
             raise forms.ValidationError('Passwords do not match')
         data.pop('password_confirmation')
+        # Make a password wth a real algorit equal at hash password
+        data['password'] = make_password(password)
         return data
     
     def save(self):

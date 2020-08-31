@@ -7,7 +7,7 @@
 {% block content %}
     {% load static %}
     
-    <form  method="POST" action="{% url 'accounts:signup' %}" class="form form-slash-efect">
+    <form  method="POST" action="{% url 'accounts:signup' %}" class="form animate__animated animate__zoomIn form-slash-efect">
         <img src="{% static 'logos/3.jpg' %}" alt="logo">
         {% csrf_token %}
         <div style="display: block; height: 100px;"></div>
@@ -20,8 +20,8 @@
             <input class="form-control" type="text" placeholder="Last Name" name="last_name" >
         </div>
         <div class="slash-efect slash-efect-hidde-right">
-            <input class="form-control" type="password" placeholder="Password" name="password">
-            <input class="form-control" type="password" placeholder="Password Confirmation" name="password_confirmation">
+            <input class="form-control" type="password" placeholder="Password" name="password" >
+            <input class="form-control" type="password" placeholder="Password Confirmation" name="password_confirmation" >
         </div>
         <span id="left" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:15%; bottom: 25px;" >
             <i class="fas fa-angle-left"></i>

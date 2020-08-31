@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" class="form animate__animated animate__zoomIn">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
+    <input class="form-control" type="text" placeholder="Position" name="position" required>
+    <input class="form-control" type="text" placeholder="Website" name="position" required>
+    <input class="form-control" type="text" placeholder="Phone" name="position" required>
+    <textarea class="form-control" placeholder="Biography" name="biography" rquired></textarea>
+    <input class="form-control" type="file" name="picture">
+    <button class="form-control btn-success"  type="submit">Update</button>
 </form>
 {% endblock content %}

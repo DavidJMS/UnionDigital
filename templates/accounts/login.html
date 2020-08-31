@@ -5,7 +5,9 @@
 {% endblock head %}
 
 {% block content %}
-    <form  method="POST" action="{% url 'accounts:login' %}" class="form">
+    {% load static %}
+    <form  method="POST" action="{% url 'accounts:login' %}" class="form animate__animated animate__zoomIn">
+        <img src="{% static 'logos/3.jpg' %}" alt="logo">
         {% csrf_token %}
         <div style="display: block; height: 100px;"></div>
         <input class="form-control" type="text" placeholder="User" name="username" >
@@ -15,7 +17,7 @@
     </form>
     {% if form.errors %}
         <p class="alert alert-danger">
-            Your Credentials Do Not Match
+            {{form.errors}}
         </p>
     {% endif %}
 {% endblock content %}
