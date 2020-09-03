@@ -11,20 +11,28 @@
     <div class="navbar-body">
         <ul>
             <li>
-                <a href="">Proyectos</a>  
-                <i class="fas fa-business-time"></i>
+                <a href="">
+                    Proyectos
+                    <i class="fas fa-business-time"></i>
+                </a>  
             </li>
             <li> 
-                <a href="">Perfil</a>  
-                <i class="fas fa-user"></i>
+                <a href="">
+                    Perfil
+                    <i class="fas fa-user"></i>
+                </a>  
             </li>
             <li> 
-                <a href="">Propuestas</a> 
-                <i class="fas fa-lightbulb"></i>
+                <a href="">
+                    Propuestas
+                    <i class="fas fa-lightbulb"></i>
+                </a> 
             </li>
             <li> 
-                <a href="">Logout</a>  
-                <i class="fas fa-sign-out-alt"></i>
+                <a href="{% url 'accounts:logout' %}">
+                    Logout
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>  
             </li>
         </ul>
     </div>

@@ -14,7 +14,7 @@ class ProfileCompletationMiddleware:
         
         # Get response
         response = self.get_response(request)
-        if request.path not in [reverse('accounts:update_profile')]:
+        if request.path not in [reverse('accounts:update_profile'),reverse('accounts:logout')]:
             if not request.user.is_anonymous:
                 if not request.user.is_staff:
                     employeeprofile = request.user.employeeprofile

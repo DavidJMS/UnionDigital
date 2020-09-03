@@ -1,12 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data" class="form animate__animated animate__zoomIn">
+<form action="{% url 'accounts:update_profile' %}" method="POST" enctype="multipart/form-data" class="form animate__animated animate__zoomIn">
     {% csrf_token %}
-    <input class="form-control" type="text" placeholder="Position" name="position" required>
-    <input class="form-control" type="text" placeholder="Website" name="position" required>
-    <input class="form-control" type="text" placeholder="Phone" name="position" required>
-    <textarea class="form-control" placeholder="Biography" name="biography" rquired></textarea>
-    <input class="form-control" type="file" name="picture">
+    <div class="form-group">
+        <label for="position">Cargo</label>
+        <input class="form-control" 
+            type="text" 
+            placeholder="Position" 
+            name="position" 
+            value="{% if form.position.error %} {{form.position.value}} {% else %} {{employeeprofile.position}} {% endif %}"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="website">Website</label>
+        <input class="form-control" 
+            type="text" 
+            placeholder="Website" 
+            name="website" 
+            value="{% if form.website.error %} {{form.website.value}} {% else %} {{employeeprofile.website}} {% endif %}"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Número De Telefono</label>
+        <input class="form-control" 
+            type="text" 
+            placeholder="Phone" 
+            name="phone_number" 
+            value="{% if form.phone_number.error %} {{form.phone_number.value}} {% else %} {{employeeprofile.phone_number}} {% endif %}"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="biography">Biografía</label>
+        <textarea class="form-control" 
+            placeholder="Biography" 
+            name="biography" 
+            required>
+            {% if form.biography.error %} {{form.biography.value}} {% else %} {{employeeprofile.biography}} {% endif %}
+        </textarea>
+    </div>
+    <div class="form-group">
+        <label for="picture">Foto De Perfil</label>
+        <input class="form-control" 
+            type="file" 
+            name="picture" 
+            style="border:none;"
+            required>
+    </div>
     <button class="form-control btn-success"  type="submit">Update</button>
 </form>
 {% endblock content %}

@@ -50,15 +50,8 @@ body{
     right: 15px;
     width: 30%;
     cursor: pointer;
+    color: #ffffff;
 }
-
-.container > .form > .btn-success:hover{
-    display: inline-block;
-  margin: 0 0.5rem;
-    animation: bounce; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 2s; /* don't forget to set a duration! */
-}
-
 .container > .form > .btn-success-out{
     border: 1px solid #f75c03;
     position: absolute;
