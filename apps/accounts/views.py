@@ -5,18 +5,23 @@ from django.views import generic as views_generic
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-# Forms
-from .forms import SignupForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpRequest
 
+# Forms
+from .forms import SignupForm, EmployeeLogin
+from django import forms
 # Models
 from .models import EmployeeProfile
 
 # Views
-class LoginView(LoginView):
+class LoginView(LoginView, SuccessMessageMixin):
     """
         View for login users
     """
     template_name = 'accounts/login.html'
+    form_class = EmployeeLogin
+    success_message = 'Bienvenido %(username)s'
 
 class LogoutView(LogoutView):
     """
@@ -24,13 +29,14 @@ class LogoutView(LogoutView):
     """
     template_name = 'accounts/login.html'
 
-class SignupView(views_generic.FormView):
+class SignupView(SuccessMessageMixin, views_generic.FormView):
     """
         View for sign up users, only persons of company can sign up
     """
     template_name = 'accounts/signup.html'
     form_class = SignupForm
     success_url = reverse_lazy('accounts:login')
+    success_message = "%(username)s Regitrado exitosamente"
 
     def form_valid(self,form):
         form.save()

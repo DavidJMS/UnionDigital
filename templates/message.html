@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        /*Animation*/
+        @-webkit-keyframes message-dissipate {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        @-moz-keyframes message-dissipate {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        @-o-keyframes message-dissipate {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        @keyframes message-dissipate {
+        50%  { opacity: 1;}
+        100% { opacity: 0; }
+        }
+        .message{
+            display: block;
+            position: absolute;
+            top: 5%;
+            right: 0;
+            left: 0;
+            margin: auto;
+            color:black;
+            max-width: 400px;
+            max-height: 300px;
+            padding: 1.5em;
+            font-size: 20px;
+        }
+        .message-success{
+            background: green;
+            animation: message-dissipate 4s ease-in;
+        }
+        .message span{
+            position: absolute;
+            right: 5%;
+            cursor: pointer;
+        }
+        .message p{   
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message message-success">
+        <span>X</span>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam obcaecati odio quasi tempore ipsum dicta minus soluta doloribus velit? Iste veritatis accusamus officia vel fugit assumenda, voluptas molestiae accusantium asperiores.
+        </p>
+    </div>
+</body>
+</html>

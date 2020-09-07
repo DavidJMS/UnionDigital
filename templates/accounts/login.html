@@ -16,8 +16,41 @@
         <a href="{% url 'accounts:signup' %}" class="form-control btn-success-out">Sign up</a>
     </form>
     {% if form.errors %}
-        <p class="alert alert-danger">
-            {{form.errors}}
-        </p>
+    <div class="message message-error animate__animated animate__slideInRight">
+        <div class="header">
+            <h4> <i class="fas fa-times"></i> Error</h4>
+        </div>
+        <div class="body">
+            {% if form.username.errors %}
+                <p>Usuario:</p>
+                <ul>
+                {% for error in form.username.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if form.password.errors %}
+                <p>Password:</p>
+                <ul>
+                {% for error in form.password.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <button class="btn-success">Entiendido</button>
+        </div>
+    </div>
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message message-success animate__animated animate__slideInRight">
+                <div class="header">
+                    <h4>{{message}}</h4>
+                </div>
+            </div>
+        {% endfor %}
     {% endif %}
 {% endblock content %}

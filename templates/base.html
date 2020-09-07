@@ -13,6 +13,7 @@
         <link href="{% static 'fontawesome/css/all.css' %}" rel="stylesheet">
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/message.css' %}">
         {% block styles %}
         
         {% endblock styles %}
@@ -22,6 +23,15 @@
             {% include 'navbar.html' %}
             {% block content %}
             {% endblock %} 
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message message-success animate__animated animate__slideInRight">
+                        <div class="header">
+                            <h4>{{message}}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <script src="{% static 'js/navbar.js' %}"></script>
     </body>

@@ -1,7 +1,7 @@
 {% extends "accounts/base.html" %}
 
 {% block head %}
-    <title>Unión Digital | Login</title>
+    <title>Unión Digital | Sign Up</title>
 {% endblock head %}
 
 {% block content %}
@@ -32,9 +32,68 @@
         <button type="submit" class="form-control btn-success">Sign Up</button>
     </form>
     {% if form.errors %}
-        <p class="alert alert-danger">
-            Your Credentials Do Not Match
-        </p>
+    <div class="message message-error animate__animated animate__slideInRight">
+        <div class="header">
+            <h4> <i class="fas fa-times"></i> Error</h4>
+        </div>
+        <div class="body">
+            {% if form.username.errors %}
+                <p>Usuario:</p>
+                <ul>
+                {% for error in form.username.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if form.email.errors %}
+                <p>Email:</p>
+                <ul>
+                {% for error in form.email.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            
+            {% if form.first_name.errors %}
+                <p>First_name:</p>
+                <ul>
+                {% for error in form.first_name.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if form.last_name.errors %}
+                <p>Last_name:</p>
+                <ul>
+                {% for error in form.last_name.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if form.password.errors %}
+                <p>Password:</p>
+                <ul>
+                {% for error in form.password.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            
+            {% if  form.non_field_errors  %}
+                <p>Password Confirmation:</p>
+                <ul>
+                    <li>{{form.non_field_errors}}</li>
+                </ul>
+            {% endif %}
+            
+        </div>
+        <div class="footer">
+            <button class="btn-success">Entiendido</button>
+        </div>
+    </div>
     {% endif %}
     <script>
 
