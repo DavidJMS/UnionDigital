@@ -1,7 +1,17 @@
+:root{
+    --light: #ffffff;
+    --orange: #f75c03;
+    --dark-background: #141E30;
+    --dark-alt: #333;
+}
+@font-face {
+    font-family: FontUnion;
+    src: url("../tipografia/FontsFree-Net-Proxima-Nova-Light.otf") format("opentype");
+}
 body{
     padding: 0px;
     margin: 0px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: FontUnion 'Open Sans', sans-serif;
 }
 
 .container{
@@ -16,7 +26,7 @@ body{
 }
 
 .container > .form{
-    background: #ffffff;
+    background: var(--light);
     max-width: 400px;
     max-height: 300px;
     width: 100%;
@@ -35,7 +45,7 @@ body{
     height: 30px;
     border-radius: 2px;
     border: none;
-    border-bottom: 1px solid #f75c03;
+    border-bottom: 1px solid var(--orange);
     padding: 2px;
     font-size: 18px;
     margin: auto;
@@ -44,17 +54,17 @@ body{
 }
 
 .container > .form > .btn-success{
-    background: #f75c03;
+    background: var(--orange);
     border: none;
     position: absolute;
     bottom: 25px;
     right: 15px;
     width: 30%;
     cursor: pointer;
-    color: #ffffff;
+    color: var(--light);
 }
 .container > .form > .btn-success-out{
-    border: 1px solid #f75c03;
+    border: 1px solid var(--orange);
     position: absolute;
     bottom: 25px;
     right: 35%;
@@ -62,7 +72,7 @@ body{
     cursor: pointer;
     text-align: center;
     box-sizing: border-box;
-    color: #f75c03;
+    color: var(--orange);
     text-decoration: none;
 }
 

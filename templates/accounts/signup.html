@@ -32,9 +32,9 @@
         <button type="submit" class="form-control btn-success">Sign Up</button>
     </form>
     {% if form.errors %}
-    <div class="message message-error animate__animated animate__slideInRight">
+    <div class="message message-error animate__animated animate__slideInDown" id="messageError">
         <div class="header">
-            <h4> <i class="fas fa-times"></i> Error</h4>
+            <span><i class="fas fa-exclamation"></i></span> 
         </div>
         <div class="body">
             {% if form.username.errors %}
@@ -84,18 +84,22 @@
             
             {% if  form.non_field_errors  %}
                 <p>Password Confirmation:</p>
-                <ul>
+                <ul style="padding: 0;margin:0">
                     <li>{{form.non_field_errors}}</li>
                 </ul>
             {% endif %}
             
         </div>
         <div class="footer">
-            <button class="btn-success">Entiendido</button>
+            <button id="close-message-error" >OK</button>
         </div>
     </div>
+    <button class="btn-error" id="open-message-error">
+        <i class="fas fa-list"></i>
+    </button> 
     {% endif %}
     <script>
+        /*                  Controls to slice efect in forms                */
 
         divToHidde = Array.from(document.getElementsByClassName('slash-efect'));
         divShowed = document.getElementsByClassName('slash-efect-show');
@@ -104,16 +108,22 @@
 
         let index = 0;
 
+        //Events in buttons
         hiddeLeftButton.addEventListener('click',(e)=>{
-            index++; 
-            hiddeToLeft(index,divToHidde);
+            if(index<divToHidde.length-1){
+                index++; 
+                hiddeToLeft(index,divToHidde);
+            }
         });
 
         hiddeRightButton.addEventListener('click',(e)=>{
-            index--; 
-            hiddeToRight(index,divToHidde);
+            if(index>0){
+                index--; 
+                hiddeToRight(index,divToHidde);
+            }
         });
 
+        //Functions hidde
         function hiddeToLeft(index,array){
             divShowed[0].classList.add("slash-efect-hidde-left");
             divShowed[0].classList.remove("slash-efect-show");
@@ -128,7 +138,19 @@
             array[index].classList.add('slash-efect-show');
         }
 
-        console.log(divToHidde);
+        /*                      Controls to hidde message error                         */
 
+        btnCloseMessageError = document.getElementById("close-message-error");
+        btnOpenMessageError = document.getElementById("open-message-error");
+        messageError = document.getElementById("messageError");
+        //Event click in buttons:
+        btnCloseMessageError.addEventListener('click',(e)=>{
+            messageError.classList.remove("animate__slideInDown");
+            messageError.classList.add("animate__slideOutUp");
+        });
+        btnOpenMessageError.addEventListener('click',(e)=>{
+            messageError.classList.remove("animate__slideInDown");
+            messageError.classList.add("animate__slideOutUp");
+        });
     </script>
 {% endblock content %}
