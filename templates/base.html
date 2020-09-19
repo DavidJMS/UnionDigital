@@ -11,6 +11,7 @@
         <link href="{% static 'tipografia/OpenSans-Light' %}" rel="stylesheet">
         <link href="{% static 'tipografia/OpenSans-Regular' %}" rel="stylesheet">
         <link href="{% static 'fontawesome/css/all.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <link href="{% static 'css/navbar.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/message.css' %}">
@@ -19,7 +20,7 @@
         {% endblock styles %}
     </head>
     <body>
-        <div class="container">
+        <div class="container container-inside">
             {% include 'navbar.html' %}
             {% block content %}
             {% endblock %} 
@@ -34,5 +35,7 @@
             {% endif %}
         </div>
         <script src="{% static 'js/navbar.js' %}"></script>
+        {% block scripts %}
+        {% endblock scripts %}
     </body>
 </html>

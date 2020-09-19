@@ -1,27 +1,26 @@
 {% extends "accounts/base.html" %}
 
 {% block head %}
-    <title>Unión Digital | Sign Up</title>
+    <title>Unión Digital | Cotizar</title>
 {% endblock head %}
 
 {% block content %}
     {% load static %}
     
-    <form  method="POST" action="{% url 'accounts:signup' %}" class="form animate__animated animate__zoomIn form-slash-efect">
+    <form  method="POST" action="{% url 'projects:create_proposal' %}" class="form form-long animate__animated animate__zoomIn form-slash-efect">
         <img src="{% static 'logos/3.jpg' %}" alt="logo">
         {% csrf_token %}
         <div style="display: block; height: 100px;"></div>
         <div class="slash-efect slash-efect-show">
-            <input class="form-control" type="text" placeholder="User Name" name="username" >
-            <input class="form-control" type="email" placeholder="Email" name="email" >
+            <input class="form-control" type="text" placeholder="Nombres" name="customer_name" >
+            <input class="form-control" type="text" placeholder="Telefono" name="customer_phone" >            
+            <input class="form-control" type="text" placeholder="Título De La Propueta" name="title">
+            <input class="form-control" type="date" placeholder="Fecha De Comienzo" name="start_date">
+            <input class="form-control" type="date" placeholder="Fecha De Finalización" name="finish_date">
         </div>
         <div class="slash-efect slash-efect-hidde-right">
-            <input class="form-control" type="text" placeholder="First Name" name="first_name" >
-            <input class="form-control" type="text" placeholder="Last Name" name="last_name" >
-        </div>
-        <div class="slash-efect slash-efect-hidde-right">
-            <input class="form-control" type="password" placeholder="Password" name="password" >
-            <input class="form-control" type="password" placeholder="Password Confirmation" name="password_confirmation" >
+        <input class="form-control" type="text" placeholder="Presupuesto" name="budget">
+            <textarea class="form-control" placeholder="Detalles" name="detail"></textarea>
         </div>
         <span id="left" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:15%; bottom: 25px;" >
             <i class="fas fa-angle-left"></i>
@@ -29,7 +28,7 @@
         <span id="right" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:25%; bottom: 25px;">
             <i class="fas fa-angle-right"></i>
         </span>
-        <button type="submit" class="form-control btn-success">Sign Up</button>
+        <button type="submit" class="form-control btn-success">Cotizar</button>
     </form>
     {% if form.errors %}
     <div class="message message-error animate__animated animate__slideInDown" id="messageError">
@@ -37,53 +36,70 @@
             <span><i class="fas fa-exclamation"></i></span> 
         </div>
         <div class="body">
-            {% if form.username.errors %}
-                <p>Usuario:</p>
+            {% if form.customer_name.errors %}
+                <p>Nombres:</p>
                 <ul>
-                {% for error in form.username.errors %}
+                {% for error in form.customer_name.errors %}
                     <li>{{error}}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
     
-            {% if form.email.errors %}
-                <p>Email:</p>
+            {% if form.customer_phone.errors %}
+                <p>Telefono:</p>
                 <ul>
-                {% for error in form.email.errors %}
+                {% for error in form.customer_phone.errors %}
                     <li>{{error}}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
             
-            {% if form.first_name.errors %}
-                <p>First_name:</p>
+            {% if form.title.errors %}
+                <p>Título:</p>
                 <ul>
-                {% for error in form.first_name.errors %}
+                {% for error in form.title.errors %}
                     <li>{{error}}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
     
-            {% if form.last_name.errors %}
-                <p>Last_name:</p>
+            {% if form.start_date.errors %}
+                <p>Fecha De Comienzo:</p>
                 <ul>
-                {% for error in form.last_name.errors %}
+                {% for error in form.start_date.errors %}
                     <li>{{error}}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
     
-            {% if form.password.errors %}
-                <p>Password:</p>
+            {% if form.finish_date.errors %}
+                <p>Fecha De Finalización:</p>
                 <ul>
-                {% for error in form.password.errors %}
+                {% for error in form.finish_date.errors %}
                     <li>{{error}}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
             
+            {% if form.budget.errors %}
+                <p>Presupuesto:</p>
+                <ul>
+                {% for error in form.budget.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if form.detail.errors %}
+                <p>Detalles:</p>
+                <ul>
+                {% for error in form.detail.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
             {% if  form.non_field_errors  %}
-                <p>Password Confirmation:</p>
                 <ul style="padding: 0;margin:0">
                     <li>{{form.non_field_errors}}</li>
                 </ul>
@@ -95,7 +111,7 @@
         </div>
     </div>
     <button class="btn-error btn-error-hidde animate__animated" id="open-message-error">
-        <i class="fas fa-exclamation"></i>
+        <i class="far fa-envelope"></i>
     </button> 
     {% endif %}
 {% endblock content %}

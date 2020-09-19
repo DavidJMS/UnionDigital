@@ -1,7 +1,7 @@
 .navbar{
     position: relative;
     width: 100%;
-    max-width: 350px;
+    max-width: 300px;
     background: #ffffff;
     height: 100%;
     max-height: 550px;
@@ -109,6 +109,8 @@
 }
 .btn-menu:focus{
     outline: none;
+    background: none;   
+    border: none;
 }
 .btn-menu .fas:hover{
     color: #f75c03;
@@ -118,11 +120,11 @@
     .navbar{
         position: absolute;
         width: 100%;
-        max-width: 350px;
+        max-width: 300px;
         background: #ffffff;
         height: 100%;
         margin-left: 0;
-        left: 0px;
+        left: -600px;
         -webkit-box-shadow: 5px 0px 4px -1px rgba(0,0,0,0.75);
         -moz-box-shadow: 5px 0px 4px -1px rgba(0,0,0,0.75);
         box-shadow: 5px 0px 4px -1px rgba(0,0,0,0.75);
@@ -137,7 +139,8 @@
     .navbar-header .btn-menu-mobile{
         display: none;
     }
-    .navbar-hidden{
-        left: -600px;
+    .navbar-show{
+        left: 0px;
+        margin-left: 0px;
     }
 }

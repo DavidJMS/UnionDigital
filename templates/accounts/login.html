@@ -6,7 +6,7 @@
 
 {% block content %}
     {% load static %}
-    <form  method="POST" action="{% url 'accounts:login' %}" class="form animate__animated animate__zoomIn">
+    <form  method="POST" action="{% url 'accounts:login' %}" class="form form-short animate__animated animate__zoomIn">
         <img src="{% static 'logos/3.jpg' %}" alt="logo">
         {% csrf_token %}
         <div style="display: block; height: 100px;"></div>
@@ -16,7 +16,7 @@
         <a href="{% url 'accounts:signup' %}" class="form-control btn-success-out">Sign up</a>
     </form>
     {% if form.errors %}
-    <div class="message message-error animate__animated animate__slideInDown">
+    <div class="message message-error animate__animated animate__slideInDown" id="messageError">
         <div class="header">
             <span><i class="fas fa-exclamation"></i></span> 
         </div>
@@ -38,11 +38,20 @@
                 {% endfor %}
                 </ul>
             {% endif %}
+
+            {% if  form.non_field_errors  %}
+                <ul style="padding: 0;margin:0">
+                    <li>{{form.non_field_errors}}</li>
+                </ul>
+            {% endif %}
         </div>
         <div class="footer">
-            <button>OK</button>
+            <button id="close-message-error">OK</button>
         </div>
     </div>
+    <button class="btn-error btn-error-hidde animate__animated" id="open-message-error">
+        <i class="fas fa-exclamation"></i>
+    </button> 
     {% endif %}
     {% if messages %}
         {% for message in messages %}

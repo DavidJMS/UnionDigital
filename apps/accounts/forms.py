@@ -1,6 +1,7 @@
 # utilities
 from django import forms
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 # models
 from .models import EmployeeProfile
@@ -29,9 +30,7 @@ class EmployeeLogin(AuthenticationForm):
     
     def cleaned_password(self):
         password = self.cleaned_data.get('password')
-        print('Entro en cleaned')
         if (len(password) <4):
-            print('El raise deberia de funcionar')
             raise ValueError('El mínimo son 4 caracteres')
 
 class SignupForm(forms.Form):
@@ -99,7 +98,6 @@ class SignupForm(forms.Form):
 
     def clean(self):
         data = super().clean()
-        print(super().clean())
         password = data.get('password')
         password_confirmation = data.get('password_confirmation')
         if not password_confirmation:
@@ -117,3 +115,44 @@ class SignupForm(forms.Form):
         profile = EmployeeProfile(user=user)
         profile.save()
         
+class ChangePasswordForm(forms.Form):
+    
+    password_old = forms.CharField(
+        widget=forms.PasswordInput,
+        min_length=4,
+        error_messages={
+            'required': 'Este campo es requerido',
+            'min_length': 'Introduzca al menos 4 caracteres',
+            'max_length': 'El límite de caracteres es de 50',
+            }
+        )
+    
+    password_new = forms.CharField(
+        widget=forms.PasswordInput,
+        min_length=4,
+        max_length=50,
+        error_messages={
+            'required': 'Este campo es requerido',
+            'min_length': 'Introduzca al menos 4 caracteres',
+            'max_length': 'El límite de caracteres es de 50',
+            }
+        )
+    
+    password_confirmation = forms.CharField(
+        widget=forms.PasswordInput,
+        min_length=4,
+        max_length=50,
+        error_messages={
+            'required': 'Este campo es requerido',
+            'min_length': 'Introduzca al menos 4 caracteres',
+            'max_length': 'El límite de caracteres es de 50',
+            }
+        )
+    
+    def clean(self):
+        data = super().clean()
+        password_new = data.get('password_new')
+        password_confirmation = data.get('password_confirmation')
+        if password_new != password_confirmation:
+            raise forms.ValidationError('La contraseña nueva y la de confirmación no coinciden. Intente nuevamente')
+        return data

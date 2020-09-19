@@ -52,6 +52,7 @@
     border: none;
     color: var(--light);
     padding: .5em 3em;
+    font-size: 18px;
 }
 .message .footer button:hover, button:focus, button:active{
     background: var(--light);
@@ -65,11 +66,23 @@
     width: 90px;
     height: 90px;
     background: none;
-    color: white;
+    color: var(--light);
     border: 0px;
     bottom: 10px;
     right: 15px;
     font-size: 40px;
     border: none;
+    cursor: pointer;
     transition: all 0.5s;
+}
+.btn-error-inside-system{
+    bottom: 70px;
+}
+.btn-error-hidde{
+    bottom: -100px;
+}
+.btn-error:hover, .btn-error:focus{
+    background: none;
+    border: none;
+    color: var(--orange);
 }

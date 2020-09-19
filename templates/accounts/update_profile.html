@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="{% url 'accounts:update_profile' %}" method="POST" enctype="multipart/form-data" class="form animate__animated animate__zoomIn">
+{% load staticfiles %}
+<form action="{% url 'accounts:update_profile' %}" method="POST" enctype="multipart/form-data" 
+    class="form form-long animate__animated animate__zoomIn">
     {% csrf_token %}
-    <div class="form-group">
-        <label for="position">Cargo</label>
-        <input class="form-control" 
-            type="text" 
-            placeholder="Position" 
-            name="position" 
-            value="{% if form.position.error %} {{form.position.value}} {% else %} {{employeeprofile.position}} {% endif %}"
-            required>
-    </div>
-    <div class="form-group">
-        <label for="website">Website</label>
+    <img class="picture-profile" src="{{user.employeeprofile.picture.url}}" alt="Foto De Perfil">
+    <div style="display: block; height: 300px;"></div>
+    <div class="slash-efect slash-efect-show">
+        <div class="form-group">
+            <input class="form-control" 
+                type="text" 
+                placeholder="Cargo" 
+                name="position" 
+                value="{% if form.position.error %} {{form.position.value}} {% else %} {{employeeprofile.position}} {% endif %}"
+                required>
+        </div>
+        <label for="website"></label>
         <input class="form-control" 
             type="text" 
             placeholder="Website" 
             name="website" 
             value="{% if form.website.error %} {{form.website.value}} {% else %} {{employeeprofile.website}} {% endif %}"
             required>
-    </div>
-    <div class="form-group">
-        <label for="phone_number">Número De Telefono</label>
+        <label for="phone_number"></label>
         <input class="form-control" 
             type="text" 
             placeholder="Phone" 
@@ -29,23 +30,89 @@
             value="{% if form.phone_number.error %} {{form.phone_number.value}} {% else %} {{employeeprofile.phone_number}} {% endif %}"
             required>
     </div>
-    <div class="form-group">
-        <label for="biography">Biografía</label>
+    <div class="slash-efect slash-efect-hidde-right">
         <textarea class="form-control" 
             placeholder="Biography" 
             name="biography" 
             required>
             {% if form.biography.error %} {{form.biography.value}} {% else %} {{employeeprofile.biography}} {% endif %}
         </textarea>
-    </div>
-    <div class="form-group">
-        <label for="picture">Foto De Perfil</label>
         <input class="form-control" 
             type="file" 
             name="picture" 
             style="border:none;"
             required>
     </div>
+    <span id="left" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:15%; bottom: 25px;" >
+        <i class="fas fa-angle-left"></i>
+    </span>
+    <span id="right" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:25%; bottom: 25px;">
+        <i class="fas fa-angle-right"></i>
+    </span>
     <button class="form-control btn-success"  type="submit">Update</button>
 </form>
+{% if form.errors %}
+    <div class="message message-error animate__animated animate__slideInDown" id="messageError">
+        <div class="header">
+            <span><i class="fas fa-exclamation"></i></span> 
+        </div>
+        <div class="body">
+            {% if form.position.errors %}
+                <p>Cargo</p>
+                <ul>
+                {% for error in form.position.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if form.website.errors %}
+                <p>Website</p>
+                <ul>
+                {% for error in form.website.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if form.phone_number.errors %}
+                <p>Número De Telefono</p>
+                <ul>
+                {% for error in form.phone_number.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if form.Biography.errors %}
+                <p>Biografía:</p>
+                <ul>
+                {% for error in form.Biography.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if form.picture.errors %}
+                <p>Foto De Perfil:</p>
+                <ul>
+                {% for error in form.picture.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <button id="close-message-error" >OK</button>
+        </div>
+    </div>
+    <button class="btn-error btn-error-inside-system btn-error-hidde animate__animated" id="open-message-error">
+        <i class="far fa-envelope"></i>
+    </button> 
+    {% endif %}
 {% endblock content %}
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/formsEffect.js' %}"></script>
+<script src="{% static 'js/messageEffect.js' %}"></script>
+{% endblock scripts %}
