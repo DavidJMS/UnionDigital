@@ -7,7 +7,7 @@
 {% block content %}
     {% load static %}
     
-    <form  method="POST" action="{% url 'projects:create_proposal' %}" class="form form-long animate__animated animate__zoomIn form-slash-efect">
+    <form  method="POST" action="{% url 'projects:create_project' %}" class="form form-long animate__animated animate__zoomIn form-slash-efect">
         <img src="{% static 'logos/3.jpg' %}" alt="logo">
         {% csrf_token %}
         <div style="display: block; height: 100px;"></div>

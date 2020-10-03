@@ -15,7 +15,8 @@
     height: 100%;
     max-height: 500px;
     display: flex;
-    align-items: start;
+    align-items: center;
+    justify-content: center;
     max-width: 1000px;
     position: relative;
     border-radius: .5rem;
@@ -40,8 +41,8 @@
  }
  .content .body{
    display: inline-block;
-   width: 100%;
-   height: 100%;
+   width: 50%;
+   height: 90%;
    margin-left: 2em;
  }
  .content .header , .body{
@@ -53,32 +54,38 @@
  .content .body .title{
    text-align: center;
  }
+ .btn-success{
+   background: var(--orange);
+   width: 30%;
+   cursor: pointer;
+   color: var(--light);
+ }
+ .btn-success-out{
+   border: 1px solid var(--orange);
+   text-align: center;
+   box-sizing: border-box;
+   color: var(--orange);
+   text-decoration: none;
+   width: 30%;
+   cursor: pointer;
+   padding: .5rem;
+   margin: 1em 0;
+ }
 </style>
 {% endblock styles %}
 {% block content %}
 {% load static %}
 <div class="content">
    <div class="body">
-      <div class="title">
-         <h3>Propuestas <i class="fas fa-lightbulb"></i><h3>
-      </div>
-      {% for proposal in proposals %}
-      <div class="card">
-        <h4>este es n titulo</h4>
-        <p>Ray</p>
-        <p>Un dia</p>
-      </div>
-      {% endfor %}
-      <div class="card">
-        <h4>este es n titulo</h4>
-        <p>Ray</p>
-        <p>Un dia</p>
-      </div>
-      <div class="card">
-        <h4>este es n titulo</h4>
-        <p>Ray</p>
-        <p>Un dia</p>
-      </div>
+      <h4>{{project.title}}</h4>
+      <p>Detalles:</p>
+      <p>{{project.detail}}</p>
+      {% if project.requeriments  %}
+      <a class="btn-success-out" href="{{project.requeriments.url}}">Requerimientos</a>
+      {% endif %}
+      {% if project.chatproject.name %}
+      <button class="btn-success">Chat</button>
+      {% endif %}
    </div>
 </div>
 {% endblock content %}

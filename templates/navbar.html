@@ -5,28 +5,22 @@
         <div>
             <i class="fas fa-user"></i>
         </div>
-        <h3>David Marabay</h3>
-        <h3>Desarrollador Web</h3>
+        <h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+        <h3>{% if request.user.employeeprofile.position %}{{request.user.employeeprofile.position}}{% endif %}</h3>
     </div>
     <div class="navbar-body">
         <ul>
             <li>
-                <a href="">
+                <a href="{% url 'projects:list_project' %}">
                     Proyectos
                     <i class="fas fa-business-time"></i>
                 </a>  
             </li>
             <li> 
-                <a href="">
+                <a href="{% url 'accounts:detail' request.user.username %}">
                     Perfil
                     <i class="fas fa-user"></i>
                 </a>  
-            </li>
-            <li> 
-                <a href="">
-                    Propuestas
-                    <i class="fas fa-lightbulb"></i>
-                </a> 
             </li>
             <li> 
                 <a href="{% url 'accounts:logout' %}">

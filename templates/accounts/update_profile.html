@@ -4,15 +4,23 @@
 <form action="{% url 'accounts:update_profile' %}" method="POST" enctype="multipart/form-data" 
     class="form form-long animate__animated animate__zoomIn">
     {% csrf_token %}
+    {% if user.employeeprofile.picture %}
     <img class="picture-profile" src="{{user.employeeprofile.picture.url}}" alt="Foto De Perfil">
     <div style="display: block; height: 300px;"></div>
+    {% else%}
+    <img src="{% static 'logos/3.jpg' %}" alt="logo">
+    <div style="display: block; height: 100px;"></div>
+    <h3>Bienvenido {{user.first_name}} {{user.last_name}}</h3>
+    {% endif %}
     <div class="slash-efect slash-efect-show">
         <div class="form-group">
             <input class="form-control" 
                 type="text" 
                 placeholder="Cargo" 
                 name="position" 
+                {% if employeeprofile.position or form.position.error %}
                 value="{% if form.position.error %} {{form.position.value}} {% else %} {{employeeprofile.position}} {% endif %}"
+                {% endif %}
                 required>
         </div>
         <label for="website"></label>
@@ -20,27 +28,30 @@
             type="text" 
             placeholder="Website" 
             name="website" 
+            {% if employeeprofile.website or form.website.error %}
             value="{% if form.website.error %} {{form.website.value}} {% else %} {{employeeprofile.website}} {% endif %}"
+            {% endif %}
             required>
         <label for="phone_number"></label>
         <input class="form-control" 
             type="text" 
             placeholder="Phone" 
-            name="phone_number" 
+            name="phone_number"
+            {% if employeeprofile.phone_number or form.phone_number.error %}
             value="{% if form.phone_number.error %} {{form.phone_number.value}} {% else %} {{employeeprofile.phone_number}} {% endif %}"
+            {% endif %}
             required>
     </div>
     <div class="slash-efect slash-efect-hidde-right">
         <textarea class="form-control" 
             placeholder="Biography" 
             name="biography" 
-            required>
-            {% if form.biography.error %} {{form.biography.value}} {% else %} {{employeeprofile.biography}} {% endif %}
-        </textarea>
+            required>{% if employeeprofile.biography or form.biography.error %}{% if form.biography.error %}{{form.biography.value}}{% else %}{{employeeprofile.biography}}{% endif %}{% endif %}</textarea>
         <input class="form-control" 
             type="file" 
             name="picture" 
             style="border:none;"
+            placeholder="Foto De Perfil"
             required>
     </div>
     <span id="left" style="color:#f75c03;font-size: 30px; display: block;cursor:pointer; position: absolute;left:15%; bottom: 25px;" >

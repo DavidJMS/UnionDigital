@@ -2,24 +2,25 @@
 from django.forms import ModelForm
 
 # my models
-from .models import WorkProposals
-class CreateProposalForm(ModelForm):
+from .models import Project
+class CreateProjectForm(ModelForm):
 
     class Meta:
-        model = WorkProposals
+        model = Project
         fields = [
             'title',
             'detail',
             'customer_name',
             'customer_phone',
-            'budget',
-            'start_date',
-            'finish_date'
+            'customer_email',
         ]
         exclude = [
             'created',
             'modified',
-            'quotation'
+            'quotation',
+            'status',
+            'employess',
+            'requeriments'
         ]
         
 

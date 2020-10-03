@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block styles %}
+<style>
+ .container{
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: start;
+    padding: 4em;
+ }
+ .content{
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    display: flex;
+    align-items: start;
+    max-width: 1000px;
+    position: relative;
+    border-radius: .5rem;
+ }
+ .content h4,h3{
+   color: var(--orange);
+ }
+ .content .header{
+    display: inline-block;
+    width: 30%;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    height: 90%;
+    /* background: pink; */
+ }
+ .content .header img{
+    width: 100%;
+    max-width: 150px;
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ .content .body{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-transform: capitalize;
+ }
+ .content .body .title{
+   text-align: center;
+   -webkit-box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   -moz-box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   padding: .1em;
+ }
+ .content .body .grid h3{
+   color: var(--dark);
+   font-size: 30px;
+   text-align: center;
+ }
+ /*Pagination*/
+ .paginate .pagination{
+   display: inline-flex;
+   list-style: none;
+   padding: 0 5px;
+ }
+ .paginate .pagination .page-item{
+   padding: .4rem;
+   border: solid var(--dark) 1px;
+   box-sizing: border-box;
+   -webkit-box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   -moz-box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   box-shadow: 0px 0px 5px 3px rgba(181,181,181,1);
+   margin: 5px;
+ }
+ .paginate .pagination .page-item .page-link{
+   color: black;
+   text-decoration: none;
+ }
+ .paginate .pagination .page-item .active{
+   color: var(--orange);
+ }
+ /*Para mobile, el contenedor me agarre el 100%*/
+ @media(min-width:500px){
+   .container .container-inside{
+     height: 100%;
+   }
+   .content{
+     max-height: none;
+   }
+ }
+</style>
+{% endblock styles %}
+{% block content %}
+{% load static %}
+<div class="content">
+    <div class="body">
+      <div class="title">
+          <h3>Proyectos <i class="fas fa-business-time"></i></h3>
+      </div>
+      <div class="grid">
+        {% for project in projects %}
+        <a href="{% url 'projects:detail_project' project.id %}" class="item">
+          <div class="item-content">
+            <h4>{{project.title}}</h4>
+            <p>{{project.customer_name}}</p>
+          </div>
+        </a>
+        {% empty%}
+          <h3>Sin proyectos por desarrollar</h3>
+        {% endfor %}
+      </div>
+      <!--Pagination-->
+      {% if is_paginated %}
+      <nav class="paginate">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+              <i class="fas fa-angle-left"></i>
+            </a>
+          </li>
+          {% endif %}
+          {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item">
+              <span class="active">{{ i }} 
+                <span class="sr-only">
+                  (current)
+                </span>
+              </span>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ i }}">
+                {{ i }}
+              </a>
+            </li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+              <i class="fas fa-angle-right"></i>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+   </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/muuri.min.js' %}"></script>
+<script>
+  var grid = new Muuri('.grid');
+</script>
+{% endblock scripts %}

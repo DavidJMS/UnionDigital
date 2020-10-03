@@ -9,7 +9,7 @@ class EmployeeProfile(models.Model):
     position = models.CharField(max_length=120, blank=True)
     biography = models.TextField(blank=True)
     website = models.URLField(max_length=200, blank=True)
-    picture = models.ImageField(upload_to='accounts/employee', blank=True, null=True)
+    picture = models.ImageField(upload_to='accounts/employee', blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
